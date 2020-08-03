@@ -12,7 +12,9 @@ jobs:
     - uses: actions/checkout@v2
 
     - name: Download depot tools
-      run: curl https://storage.googleapis.com/chrome-infra/depot_tools.zip --output "./tmp/depot_tools.zip"
+      run: 
+        mkdir tmp |
+        curl https://storage.googleapis.com/chrome-infra/depot_tools.zip --output "./tmp/depot_tools.zip"
     - name: Extract depot tools
       run: 7z x "./tmp/depot_tools.zip" -o"./depot_tools/"
     - name: Prepend depot tools to system path
