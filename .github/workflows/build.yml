@@ -18,7 +18,7 @@ jobs:
       run: 7z x depot_tools.zip -odepot_tools
       
     - name: Prepend depot tools to system path
-      run: echo "::add-path::./depot_tools/"
+      run: echo "::add-path::%cd%\depot_tools\"
       
     - name: Initialize glient
       run: |
