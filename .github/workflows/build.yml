@@ -13,15 +13,23 @@ jobs:
 
     - name: Download depot tools
       run: curl https://storage.googleapis.com/chrome-infra/depot_tools.zip --output depot_tools.zip
+      
     - name: Extract depot tools
       run: 7z x depot_tools.zip -odepot_tools
+      
     - name: Prepend depot tools to system path
       run: echo "::add-path::./depot_tools/"
+      
     - name: Initialize glient
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         gclient
       shell: cmd
+      
+    - name: Check it worked
+      run: where python
+      shell: cmd
+      
     - name: Clone PDFium
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
