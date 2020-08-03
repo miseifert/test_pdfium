@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: windows-2019
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Download depot tools
+      run: curl https://storage.googleapis.com/chrome-infra/depot_tools.zip --output depot_tools.zip
+    - name: Extract depot tools
+      run: 7z e depot_tools.zip -o "./depot_tools/"
+    - name: Prepend depot tools to system path
+      run: echo "::add-path::./depot_tools/"
+    - name: Initialize glient
+      run: gclient
+      shell: cmd
+      
+
+    #- name: Upload a Build Artifact
+    #  uses: actions/upload-artifact@v2
+    #  with:
+    #    path: out/foo
