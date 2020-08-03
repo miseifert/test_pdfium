@@ -18,7 +18,18 @@ jobs:
     - name: Prepend depot tools to system path
       run: echo "::add-path::./depot_tools/"
     - name: Initialize glient
-      run: gclient
+      run: |
+        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+        gclient
+      shell: cmd
+    - name: Clone PDFium
+      run: |
+        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+        mkdir repo
+        cd repo
+        gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
+        gclient sync
+        "./pdfium/build/install-build-deps.sh"
       shell: cmd
       
 
