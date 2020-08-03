@@ -14,6 +14,7 @@ jobs:
     - name: Download depot tools
       run: 
         mkdir tmp |
+        cd tmp |
         curl https://storage.googleapis.com/chrome-infra/depot_tools.zip --output "./tmp/depot_tools.zip"
     - name: Extract depot tools
       run: 7z x "./tmp/depot_tools.zip" -o"./depot_tools/"
