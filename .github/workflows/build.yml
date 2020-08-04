@@ -30,27 +30,27 @@ jobs:
       run: where python
       shell: cmd
 
-    - name: Clone PDFium 1
+    - name: Create Pfium (Create directory)
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         mkdir pdfium_repo
       shell: cmd
 
-    - name: Clone PDFium 2
+    - name: Clone PDFium 2 (gclient config)
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
       shell: cmd
       working-directory: ./pdfium_repo
 
-    - name: Clone PDFium 3
+    - name: Clone PDFium 3 (Sync repo)
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         gclient sync
       shell: cmd
       working-directory: ./pdfium_repo
 
-    - name: Clone PDFium 4
+    - name: Clone PDFium 4 (dependencies)
       # Instead of manually installing pywin32 we probably should execute ./build/install-build-deps.sh
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
@@ -58,27 +58,27 @@ jobs:
         call python.bat -m pip install pywin32
       shell: cmd
 
-    - name: Pacthes
+    - name: Apply Patches
       run: |
         copy "./ext/PdfiumViewer/Contrib/pdfiumviewer.cpp" "./pdfium_repo/pdfium/fpdfsdk/"
         cd "./pdfium_repo/pdfium"
         git.exe apply -v "../../shared_library.patch"
       shell: cmd
 
-    - name: Compile PDFium 1
+    - name: Compile PDFium 1 (copy args)
       run: |
         mkdir "./pdfium_repo/pdfium/out"
         copy "args.gn" "./pdfium_repo/pdfium/out/"
       shell: cmd
 
-    - name: Compile PDFium 2
+    - name: Compile PDFium 2 (gn)
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         gn gen out
       shell: cmd
       working-directory: ./pdfium_repo/pdfium
 
-    - name: Compile PDFium 3
+    - name: Compile PDFium 3 (Ninja)
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         ninja -C out pdfium
