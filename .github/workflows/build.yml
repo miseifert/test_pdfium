@@ -26,7 +26,7 @@ jobs:
         gclient
       shell: cmd
 
-    - name: Clone PDFium
+    - name: PDFium
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         mkdir repo
@@ -35,18 +35,8 @@ jobs:
         gclient sync
         cd pdfium
         "./build/install-build-deps.sh"
-      shell: cmd
-
-    - name: Generate PDFium config
-      run: |
-        mkdir "./repo/pdfium/out"
-        copy "./args.gn" "./repo/pdfium/out"
-      shell: cmd
-
-    - name: Generate PDFium
-      run: |
-        cd "./repo/pdfium"
-        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+        mkdir "./out"
+        copy "../../args.gn" "./out/"
         gn gen out
         ninja -C out pdfium
       shell: cmd
