@@ -26,17 +26,25 @@ jobs:
         gclient
       shell: cmd
 
-    - name: PDFium
+    - name: Check it worked
+      run: where python
+      shell: cmd
+
+    - name: Clone PDFium
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
-        mkdir repo
-        cd repo
+        mkdir pdfium_repo
+        cd pdfium_repo
         gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
         gclient sync
-        cd pdfium
-        "./build/install-build-deps.sh"
-        mkdir "./out"
-        copy "../../args.gn" "./out/"
+        dir .
+
+    - name: Compile PDFium
+      run: |
+        "./pdfium_repo/pdfium/build/install-build-deps.sh"
+        mkdir "./pdfium_repo/pdfium/out"
+        copy "args.gn" "./pdfium_repo/pdfium/out/"
+        cd "./pdfium_repo/pdfium/"
         gn gen out
         ninja -C out pdfium
       shell: cmd
