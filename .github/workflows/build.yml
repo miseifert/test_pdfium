@@ -50,7 +50,15 @@ jobs:
       shell: cmd
       working-directory: ./pdfium_repo
 
-    - name: Clone PDFium 4 (dependencies)
+    - name: Clone PDFium 4 (Select branch)
+      run: |
+        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+        git.exe checkout chromium/4222
+        gclient sync
+      shell: cmd
+      working-directory: ./pdfium_repo/pdfium
+
+    - name: Clone PDFium 5 (Install dependencies)
       # Instead of manually installing pywin32 we probably should execute ./build/install-build-deps.sh
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
