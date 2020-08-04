@@ -50,14 +50,8 @@ jobs:
       shell: cmd
       working-directory: ./pdfium_repo
 
-    #- name: Clone PDFium 4
-    #  run: |
-    #    set DEPOT_TOOLS_WIN_TOOLCHAIN=0
-    #    cd ./pdfium_repo/pdfium
-    #    "./build/install-build-deps.sh"
-    #  shell: cmd
-
     - name: Clone PDFium 4
+      # Instead of manually installing pywin32 we probably should execute ./build/install-build-deps.sh
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         cd ./pdfium_repo/pdfium
@@ -85,7 +79,7 @@ jobs:
       working-directory: ./pdfium_repo/pdfium
 
 
-    #- name: Upload a Build Artifact
-    #  uses: actions/upload-artifact@v2
-    #  with:
-    #    path: out/foo
+    - name: Upload PDFium DLL
+      uses: actions/upload-artifact@v2
+      with:
+        path: ./pdfium_repo/pdfium/out/pdfium.dll
