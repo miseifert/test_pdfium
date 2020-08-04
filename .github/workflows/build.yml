@@ -36,11 +36,22 @@ jobs:
         "./pdfium/build/install-build-deps.sh"
       shell: cmd
 
+    - name: Clone PDFium
+      run: |
+        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+        "./pdfium/build/install-build-deps.sh"
+      shell: cmd
+
     - name: Generate PDFium config
       run: |
         mkdir "repo/pdfium/out"
         copy "./args.gn" "repo/pdfium/out"
+      shell: cmd
+
+    - name: Generate PDFium
+      run: |
         cd "repo/pdfium"
+        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         gn gen out
         ninja -C out pdfium
       shell: cmd
