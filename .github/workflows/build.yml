@@ -58,6 +58,13 @@ jobs:
         call python.bat -m pip install pywin32
       shell: cmd
 
+    - name: Pacthes
+      run: |
+        copy "./ext/PdfiumViewer/Contrib/pdfiumviewer.cpp" "./pdfium_repo/pdfium/fpdfsdk/"
+        cd "./pdfium_repo/pdfium"
+        git.exe apply -v "../../shared_library.patch"
+      shell: cmd
+
     - name: Compile PDFium 1
       run: |
         mkdir "./pdfium_repo/pdfium/out"
