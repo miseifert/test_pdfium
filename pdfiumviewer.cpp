@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 #include "public/fpdfview.h"
+#include "public/fpdf_doc.h"
 #if PDF_ENABLE_V8
 #include "v8/include/v8.h"
 #include "v8/include/libplatform/libplatform.h"
@@ -104,5 +105,5 @@ FPDF_EXPORT void FPDF_CALLCONV FPDF_Release()
 
 FPDF_EXPORT int FPDF_CALLCONV FPDFDest_GetPageIndex(FPDF_DOCUMENT document, FPDF_DEST dest)
 {
-	return FPDFDest_GetDestPageIndex(document, dest)
+	return FPDFDest_GetDestPageIndex(document, dest);
 }
