@@ -65,7 +65,7 @@ jobs:
 
     - name: Apply Patches (Git patches)
       run: |
-        git.exe apply -v "../../shared_library.patch"
+        git.exe apply -v "../../shared_library_patch.txt" --ignore-space-change --ignore-whitespace
       shell: cmd
       working-directory: ./pdfium_repo/pdfium
 
