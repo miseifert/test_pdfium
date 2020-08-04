@@ -26,8 +26,12 @@ jobs:
         gclient
       shell: cmd
 
-    - name: Check it worked
+    - name: Python there?
       run: where python
+      shell: cmd
+
+    - name: rc there?
+      run: where rc
       shell: cmd
 
     - name: Clone PDFium 1
@@ -53,9 +57,9 @@ jobs:
     - name: Clone PDFium 4
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+        cd ./pdfium_repo/pdfium
         "./build/install-build-deps.sh"
       shell: cmd
-      working-directory: ./pdfium_repo/pdfium
 
     - name: Compile PDFium 1
       run: |
