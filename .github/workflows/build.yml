@@ -31,7 +31,7 @@ jobs:
       shell: cmd
 
     - name: rc there?
-      run: where rc
+      run: where rc.exe
       shell: cmd
 
     - name: Clone PDFium 1
