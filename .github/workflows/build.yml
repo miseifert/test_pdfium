@@ -30,24 +30,52 @@ jobs:
       run: where python
       shell: cmd
 
-    - name: Clone PDFium
+    - name: Clone PDFium 1
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         mkdir pdfium_repo
-        cd pdfium_repo
-        gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
-        gclient sync
-        dir .
+      shell: cmd
 
-    - name: Compile PDFium
+    - name: Clone PDFium 2
       run: |
-        "./pdfium_repo/pdfium/build/install-build-deps.sh"
+        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+        gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
+      shell: cmd
+      working-directory: ./pdfium_repo
+
+    - name: Clone PDFium 3
+      run: |
+        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+        gclient sync
+      shell: cmd
+      working-directory: ./pdfium_repo
+
+    - name: Clone PDFium 4
+      run: |
+        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+        "./build/install-build-deps.sh"
+      shell: cmd
+      working-directory: ./pdfium_repo/pdfium
+
+    - name: Compile PDFium 1
+      run: |
         mkdir "./pdfium_repo/pdfium/out"
         copy "args.gn" "./pdfium_repo/pdfium/out/"
-        cd "./pdfium_repo/pdfium/"
+      shell: cmd
+
+    - name: Compile PDFium 2
+      run: |
+        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         gn gen out
+      shell: cmd
+      working-directory: ./pdfium_repo/pdfium
+
+    - name: Compile PDFium 3
+      run: |
+        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         ninja -C out pdfium
       shell: cmd
+      working-directory: ./pdfium_repo/pdfium
 
 
     #- name: Upload a Build Artifact
