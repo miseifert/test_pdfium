@@ -26,10 +26,6 @@ jobs:
         gclient
       shell: cmd
 
-    - name: Check it worked
-      run: where python
-      shell: cmd
-
     - name: Clone PDFium
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
@@ -42,10 +38,12 @@ jobs:
 
     - name: Generate PDFium config
       run: |
+        mkdir "repo/pdfium/out"
         copy "./args.gn" "repo/pdfium/out"
         cd "repo/pdfium"
         gn gen out
         ninja -C out pdfium
+      shell: cmd
 
 
     #- name: Upload a Build Artifact
