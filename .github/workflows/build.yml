@@ -93,4 +93,4 @@ jobs:
     - name: Upload PDFium DLL
       uses: actions/upload-artifact@v2
       with:
-        path: ./pdfium_repo/pdfium/out/
+        path: ./pdfium_repo/pdfium/out/pdfium.dll
