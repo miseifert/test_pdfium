@@ -27,17 +27,6 @@ index bb650b634..d62c687e7 100644
    libs = []
    configs += [ ":pdfium_core_config" ]
    public_configs = [ ":pdfium_public_config" ]
-@@ -174,6 +178,10 @@ component("pdfium") {
-     "core/fxcrt",
-   ]
- 
-+  sources += [
-+    "fpdfsdk/pdfiumviewer.cpp",
-+  ]
-+
-   if (pdf_enable_xfa) {
-     deps += [
-       "fpdfsdk/fpdfxfa",
 diff --git a/public/fpdfview.h b/public/fpdfview.h
 index 27df9bd0b..2eb40d4dd 100644
 --- a/public/fpdfview.h
@@ -62,3 +51,13 @@ index 27df9bd0b..2eb40d4dd 100644
  
  #if defined(WIN32) && defined(FPDFSDK_EXPORTS)
  #define FPDF_CALLCONV __stdcall
+--- a/fpdfsdk/BUILD.gn
++++ b/fpdfsdk/BUILD.gn
+@@ -70,6 +70,7 @@ source_set("fpdfsdk") {
+     "fpdf_transformpage.cpp",
+     "fpdf_view.cpp",
+     "ipdfsdk_annothandler.h",
++    "pdfiumviewer.cpp",
+   ]
+ 
+   configs += [ "../:pdfium_core_config" ]
