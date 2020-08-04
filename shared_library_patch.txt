@@ -31,7 +31,7 @@ index bb650b634..d62c687e7 100644
      "core/fxcrt",
    ]
  
-+  sources = [
++  sources += [
 +    "fpdfsdk/pdfiumviewer.cpp",
 +  ]
 +
