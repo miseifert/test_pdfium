@@ -33,12 +33,7 @@ jobs:
         cd repo
         gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
         gclient sync
-      shell: cmd
-
-    - name: PDFium setup
-      run: |
-        cd "./repo/pdfium"
-        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+        cd pdfium
         "./build/install-build-deps.sh"
       shell: cmd
 
