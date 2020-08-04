@@ -37,10 +37,10 @@ jobs:
 
     - name: PDFium setup
       run: |
+        cd "./repo/pdfium"
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         "./build/install-build-deps.sh"
       shell: cmd
-      working-directory: ./repo/pdfium
 
     - name: Generate PDFium config
       run: |
@@ -50,11 +50,11 @@ jobs:
 
     - name: Generate PDFium
       run: |
+        cd "./repo/pdfium"
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         gn gen out
         ninja -C out pdfium
       shell: cmd
-      working-directory: ./repo/pdfium
 
 
     #- name: Upload a Build Artifact
