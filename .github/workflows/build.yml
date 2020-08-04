@@ -58,12 +58,16 @@ jobs:
         call python.bat -m pip install pywin32
       shell: cmd
 
-    - name: Apply Patches
+    - name: Apply Patches (Copy files)
       run: |
         copy "./ext/PdfiumViewer/Contrib/pdfiumviewer.cpp" "./pdfium_repo/pdfium/fpdfsdk/"
-        cd "./pdfium_repo/pdfium"
+      shell: cmd
+
+    - name: Apply Patches (Git patches)
+      run: |
         git.exe apply -v "../../shared_library.patch"
       shell: cmd
+      working-directory: ./pdfium_repo/pdfium
 
     - name: Compile PDFium 1 (copy args)
       run: |
