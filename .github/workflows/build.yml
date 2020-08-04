@@ -33,14 +33,14 @@ jobs:
         cd repo
         gclient config --unmanaged https://pdfium.googlesource.com/pdfium.git
         gclient sync
-        "./pdfium/build/install-build-deps.sh"
       shell: cmd
 
     - name: Clone PDFium
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
-        "./pdfium/build/install-build-deps.sh"
+        ".build/install-build-deps.sh"
       shell: cmd
+      working-directory: repo/pdfium
 
     - name: Generate PDFium config
       run: |
@@ -50,11 +50,11 @@ jobs:
 
     - name: Generate PDFium
       run: |
-        cd "repo/pdfium"
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         gn gen out
         ninja -C out pdfium
       shell: cmd
+      working-directory: repo/pdfium
 
 
     #- name: Upload a Build Artifact
