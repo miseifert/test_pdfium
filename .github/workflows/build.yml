@@ -35,17 +35,17 @@ jobs:
         gclient sync
       shell: cmd
 
-    - name: Clone PDFium
+    - name: PDFium setup
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
-        ".build/install-build-deps.sh"
+        "./build/install-build-deps.sh"
       shell: cmd
       working-directory: repo/pdfium
 
     - name: Generate PDFium config
       run: |
-        mkdir "repo/pdfium/out"
-        copy "./args.gn" "repo/pdfium/out"
+        mkdir "./repo/pdfium/out"
+        copy "./args.gn" "./repo/pdfium/out"
       shell: cmd
 
     - name: Generate PDFium
