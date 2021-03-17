@@ -2,7 +2,11 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 
 jobs:
   build:
@@ -18,16 +22,12 @@ jobs:
       run: 7z x depot_tools.zip -odepot_tools
 
     - name: Prepend depot tools to system path
-      run: echo "::add-path::${{ github.workspace }}/depot_tools"
+      run: echo "${{ github.workspace }}\depot_tools" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
 
     - name: Initialize gclient
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
         gclient
-      shell: cmd
-
-    - name: Python there?
-      run: where python
       shell: cmd
 
     - name: Create Pfium (Create directory)
@@ -53,7 +53,7 @@ jobs:
     - name: Clone PDFium 4 (Select branch)
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
-        git.exe checkout chromium/4245
+        git.exe checkout chromium/4448
         gclient sync
       shell: cmd
       working-directory: ./pdfium_repo/pdfium
