@@ -73,7 +73,10 @@ jobs:
 
     - name: Apply Patches (Git patches)
       run: |
-        git.exe apply -v "../../shared_library_patch.txt" --ignore-space-change --ignore-whitespace
+        git.exe apply -v "../../ext/pdfium-binaries/patches/shared_library.patch" --ignore-space-change --ignore-whitespace
+        git.exe apply -v "../../ext/pdfium-binaries/patches/public_headers.patch" --ignore-space-change --ignore-whitespace
+        git.exe apply -v "../../ext/pdfium-binaries/patches/widestring.patch" --ignore-space-change --ignore-whitespace
+        git.exe apply -v "../../include_pdfiumviewer.txt" --ignore-space-change --ignore-whitespace
       shell: cmd
       working-directory: ./pdfium_repo/pdfium
 
