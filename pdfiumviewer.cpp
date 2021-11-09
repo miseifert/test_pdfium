@@ -88,8 +88,11 @@ public:
 	}
 };
 
-static RefCounter& refCounter = *new RefCounter;
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wexit-time-destructors"
+#pragma clang diagnostic ignored "-Wglobal-constructors"
+static RefCounter refCounter;
+#pragma clang diagnostic pop
 
 FPDF_EXPORT void FPDF_CALLCONV FPDF_AddRef()
 {
