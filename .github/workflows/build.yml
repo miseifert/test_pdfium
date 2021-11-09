@@ -30,6 +30,12 @@ jobs:
         gclient
       shell: cmd
 
+    - name: Test
+      run: |
+        Get-ChildItem -Path . -Filter depot_tools.zip -Recurse
+      shell: pwsh
+      working-directory: ./
+
     - name: Create Pfium (Create directory)
       run: |
         set DEPOT_TOOLS_WIN_TOOLCHAIN=0
