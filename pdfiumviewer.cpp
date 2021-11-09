@@ -88,7 +88,7 @@ public:
 	}
 };
 
-static RefCounter refCounter;
+static RefCounter& refCounter = *new RefCounter;
 
 
 FPDF_EXPORT void FPDF_CALLCONV FPDF_AddRef()
