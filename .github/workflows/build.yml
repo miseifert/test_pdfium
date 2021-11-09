@@ -100,35 +100,41 @@ jobs:
       shell: cmd
       working-directory: ./pdfium_repo/pdfium
 
+    - name: Compile PDFium x64 4 (List directory)
+      run: |
+        tree
+      shell: cmd
+      working-directory: ./pdfium_repo/pdfium/out/x64
+
     - name: Upload PDFium DLL x64
       uses: actions/upload-artifact@v2
       with:
         name: x64
-        path: ./pdfium_repo/pdfium/out/x64/pdfium.dll
+        path: ./pdfium_repo/pdfium/out/x64
 
 
-    - name: Compile PDFium x86 1 (copy args)
-      run: |
-        mkdir "./pdfium_repo/pdfium/out/x86"
-        copy "args.x86.gn" "./pdfium_repo/pdfium/out/x86/args.gn"
-      shell: cmd
+    # - name: Compile PDFium x86 1 (copy args)
+    #   run: |
+    #     mkdir "./pdfium_repo/pdfium/out/x86"
+    #     copy "args.x86.gn" "./pdfium_repo/pdfium/out/x86/args.gn"
+    #   shell: cmd
 
-    - name: Compile PDFium x86 2 (gn)
-      run: |
-        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
-        gn gen out/x86
-      shell: cmd
-      working-directory: ./pdfium_repo/pdfium
+    # - name: Compile PDFium x86 2 (gn)
+    #   run: |
+    #     set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+    #     gn gen out/x86
+    #   shell: cmd
+    #   working-directory: ./pdfium_repo/pdfium
 
-    - name: Compile PDFium x86 3 (Ninja)
-      run: |
-        set DEPOT_TOOLS_WIN_TOOLCHAIN=0
-        ninja -C out/x86 pdfium
-      shell: cmd
-      working-directory: ./pdfium_repo/pdfium
+    # - name: Compile PDFium x86 3 (Ninja)
+    #   run: |
+    #     set DEPOT_TOOLS_WIN_TOOLCHAIN=0
+    #     ninja -C out/x86 pdfium
+    #   shell: cmd
+    #   working-directory: ./pdfium_repo/pdfium
 
-    - name: Upload PDFium DLL x86
-      uses: actions/upload-artifact@v2
-      with:
-        name: x86
-        path: ./pdfium_repo/pdfium/out/x86/pdfium.dll
+    # - name: Upload PDFium DLL x86
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: x86
+    #     path: ./pdfium_repo/pdfium/out/x86/pdfium.dll
