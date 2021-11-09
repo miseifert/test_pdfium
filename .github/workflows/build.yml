@@ -102,15 +102,15 @@ jobs:
 
     - name: Compile PDFium x64 4 (List directory)
       run: |
-        tree
+        Get-ChildItem -Path . -Filter pdfium.dll -Recurse
       shell: pwsh
-      working-directory: ./pdfium_repo/pdfium
+      working-directory: ./
 
-    - name: Upload PDFium DLL x64
-      uses: actions/upload-artifact@v2
-      with:
-        name: x64
-        path: ./pdfium_repo/pdfium/out/x64
+    # - name: Upload PDFium DLL x64
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: x64
+    #     path: ./pdfium_repo/pdfium/out/x64
 
 
     # - name: Compile PDFium x86 1 (copy args)
