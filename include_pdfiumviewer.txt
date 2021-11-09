@@ -1,12 +1,12 @@
-diff --git a/BUILD.gn b/BUILD.gn
-index bb650b634..d62c687e7 100644
+diff --git a/fpdfsdk/BUILD.gn b/fpdfsdk/BUILD.gn
+index 748f43f4f..d28f43f02 100644
 --- a/fpdfsdk/BUILD.gn
 +++ b/fpdfsdk/BUILD.gn
-@@ -70,6 +70,7 @@ source_set("fpdfsdk") {
-     "fpdf_transformpage.cpp",
+@@ -69,6 +69,7 @@ source_set("fpdfsdk") {
      "fpdf_view.cpp",
+     "ipdfsdk_annothandler.cpp",
      "ipdfsdk_annothandler.h",
 +    "pdfiumviewer.cpp",
    ]
  
-   configs += [ "../:pdfium_core_config" ]
+   configs += [ "../:pdfium_strict_config" ]
